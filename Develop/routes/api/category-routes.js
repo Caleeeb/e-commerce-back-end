@@ -12,12 +12,12 @@ router.get("/", (req, res) => {
 			attributes: ["category_id", "id", "product_name", "stock", "price"],
 		},
 	})
-		.then((productData) => {
-			if (!productData) {
+		.then((data) => {
+			if (!data) {
 				res.status(404).json({ message: "Category not found." });
 				return;
 			}
-			res.json(productData);
+			res.json(data);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -37,12 +37,12 @@ router.get("/:id", (req, res) => {
 			attributes: ["category_id", "id", "product_name", "stock", "price"],
 		},
 	})
-		.then((productData) => {
-			if (!productData) {
+		.then((data) => {
+			if (!data) {
 				res.status(404).json({ message: "Category not found." });
 				return;
 			}
-			res.json(productData);
+			res.json(data);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -55,7 +55,7 @@ router.post("/", (req, res) => {
 	Category.create({
 		category_name: req.body.category_name,
 	})
-		.then((categoryData) => res.json(categoryData))
+		.then((data) => res.json(data))
 		.catch((err) => {
 			console.log(err);
 			res.status(500).json(err);
@@ -64,10 +64,42 @@ router.post("/", (req, res) => {
 
 router.put("/:id", (req, res) => {
 	// update a category by its `id` value
+	Category.update(req.body, {
+		where: {
+			id: req.params.id,
+		},
+	})
+		.then((data) => {
+			if (!data[0]) {
+				res.status(404).json({ message: "Category could not be found." });
+				return;
+			}
+			res.json(data);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json(err);
+		});
 });
 
 router.delete("/:id", (req, res) => {
 	// delete a category by its `id` value
+	Category.destroy({
+		where: {
+			id: req.params.id,
+		},
+	})
+		.then((data) => {
+			if (!data[0]) {
+				res.status(404).json({ message: "Category could not be found." });
+				return;
+			}
+			res.json(data);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json(err);
+		});
 });
 
 module.exports = router;
