@@ -28,12 +28,6 @@ Videos of the application in action:
 
 [Tag routes video link](https://drive.google.com/file/d/1O0vyaux3ZrQF8xnAQUjqA6jzVq3kfoXV/view)
 
-Visuals:
-
-<kbd>
-<img src="./develop/images/ecommerce-screenshot.PNG" />
-</kbd>
-
 <p style='text-align: right;'><a href='#title'>Back to top</a></p>
 
 <h2 id='license'>License</h2>
