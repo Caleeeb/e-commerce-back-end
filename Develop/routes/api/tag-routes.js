@@ -33,9 +33,15 @@ router.get("/:id", (req, res) => {
 			attributes: ["product_name", "id", "stock", "category_id", "price"],
 		},
 	})
-		.then((data) => res.json(data))
+		.then((data) => {
+			if (!data) {
+				res.status(404).json({ message: "Tag not found." });
+				return;
+			}
+			res.json(data);
+		})
 		.catch((err) => {
-			// console.log(err);
+			console.log(err);
 			res.status(400).json(err);
 		});
 });
@@ -47,7 +53,7 @@ router.post("/", (req, res) => {
 	})
 		.then((data) => res.json(data))
 		.catch((err) => {
-			// console.log(err);
+			console.log(err);
 			res.status(400).json(err);
 		});
 });
